@@ -1,0 +1,12 @@
+# Only deploy the portfolio website and Vercel API.
+/*
+!index.html
+!style.css
+!script.js
+!README.md
+!package.json
+!api
+!api/**
+!assets
+!assets/**
+
