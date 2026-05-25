@@ -953,17 +953,21 @@ h3 {
 
 .mobile-line-button {
   position: fixed;
-  left: 14px;
   right: 14px;
-  bottom: 14px;
+  bottom: max(14px, env(safe-area-inset-bottom));
   z-index: 35;
+  width: auto;
+  min-width: 122px;
   min-height: 52px;
   display: none;
-  place-items: center;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
   color: #fff;
   background: #06c755;
-  border-radius: var(--radius);
+  border-radius: 999px;
   box-shadow: 0 16px 34px rgba(6, 199, 85, 0.28);
+  font-size: 14px;
   font-weight: 900;
 }
 
@@ -1081,16 +1085,222 @@ h3 {
 }
 
 @media (max-width: 720px) {
+  html {
+    scroll-padding-top: 78px;
+  }
+
   body {
-    padding-bottom: 74px;
+    padding-bottom: max(86px, calc(env(safe-area-inset-bottom) + 72px));
+    background-size:
+      54px 54px,
+      54px 54px,
+      auto;
+  }
+
+  .site-header {
+    min-height: 62px;
+    gap: 10px;
+    padding: 10px 14px;
+  }
+
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+    font-size: 12px;
+  }
+
+  .site-nav {
+    flex: 1 1 auto;
+    min-width: 0;
+    gap: 4px;
+    padding: 4px;
+  }
+
+  .site-nav a {
+    min-height: 34px;
+    padding: 0 11px;
+    font-size: 13px;
+  }
+
+  .nav-indicator {
+    top: 4px;
+    height: 34px;
+  }
+
+  .section {
+    width: min(100% - 36px, 1120px);
+    padding: 64px 0;
+  }
+
+  .hero {
+    gap: 42px;
+    padding-top: 58px;
+    padding-bottom: 42px;
+  }
+
+  h1 {
+    margin-bottom: 24px;
+    font-size: clamp(42px, 13vw, 64px);
+    line-height: 1.08;
+  }
+
+  h2 {
+    margin-bottom: 18px;
+    font-size: clamp(32px, 9vw, 44px);
+    line-height: 1.12;
+  }
+
+  h3 {
+    line-height: 1.35;
+  }
+
+  .eyebrow {
+    margin-bottom: 14px;
+    line-height: 1.55;
+  }
+
+  .position {
+    margin-bottom: 24px;
+    font-size: 17px;
+    line-height: 1.75;
+  }
+
+  .intro,
+  .section-heading p,
+  .contact-copy p {
+    font-size: 16px;
+    line-height: 1.95;
+  }
+
+  .intro {
+    margin-bottom: 34px;
+  }
+
+  .hero-actions {
+    gap: 12px;
+  }
+
+  .button,
+  .work-link,
+  .copy-email,
+  .email-link {
+    min-height: 50px;
+  }
+
+  .content-board,
+  .content-board:hover {
+    max-width: 100%;
+    padding: 16px;
+  }
+
+  .board-topline {
+    margin-bottom: 16px;
+  }
+
+  .video-frame,
+  .content-board:hover .video-frame,
+  .content-board:focus-within .video-frame {
+    min-height: 0;
+    aspect-ratio: 9 / 13;
+    padding: 16px;
+  }
+
+  .metric-strip,
+  .workflow-list {
+    gap: 10px;
+  }
+
+  .metric-strip div {
+    padding: 16px;
+  }
+
+  .section-heading {
+    margin-bottom: 34px;
+  }
+
+  .results-grid,
+  .work-grid,
+  .process-grid {
+    gap: 18px;
+  }
+
+  .result-card {
+    min-height: 154px;
+    padding: 20px;
+  }
+
+  .result-card strong {
+    font-size: 22px;
+    line-height: 1.5;
+  }
+
+  .featured-proof {
+    gap: 22px;
+    margin-bottom: 22px;
+    padding: 16px;
+  }
+
+  .proof-copy p {
+    line-height: 1.7;
+  }
+
+  .skill-item {
+    min-height: 76px;
+    padding: 18px;
+  }
+
+  .work-card {
+    padding: 18px;
+  }
+
+  .work-thumb {
+    min-height: 260px;
+    margin-bottom: 20px;
+  }
+
+  .work-card dl {
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .work-card dd,
+  .process-step p {
+    line-height: 1.85;
+  }
+
+  .process-step {
+    min-height: 0;
+    padding: 20px;
+  }
+
+  .process-step span {
+    margin-bottom: 24px;
+  }
+
+  .contact-section {
+    gap: 28px;
+    padding-bottom: 92px;
+  }
+
+  .site-footer {
+    padding-bottom: 86px;
+  }
+
+  .line-dialog-card {
+    padding: 20px;
+  }
+
+  .line-dialog-card h2 {
+    font-size: 22px;
   }
 
   .mobile-line-button {
-    display: grid;
+    display: inline-flex;
+    min-height: 44px;
   }
 
   .back-to-top.visible {
-    bottom: 78px;
+    bottom: max(74px, calc(env(safe-area-inset-bottom) + 60px));
   }
 }
 
@@ -1154,17 +1364,17 @@ h3 {
   }
 
   .section {
-    width: min(100% - 28px, 1120px);
+    width: min(100% - 36px, 1120px);
   }
 
   .hero {
-    gap: 36px;
-    padding-top: 54px;
-    padding-bottom: 30px;
+    gap: 44px;
+    padding-top: 56px;
+    padding-bottom: 40px;
   }
 
   h1 {
-    font-size: clamp(40px, 15vw, 56px);
+    font-size: clamp(40px, 14vw, 56px);
   }
 
   .site-nav {
@@ -1174,7 +1384,7 @@ h3 {
   .content-board,
   .content-board:hover {
     max-width: 100%;
-    padding: 14px;
+    padding: 16px;
   }
 
   .video-frame,
@@ -1199,7 +1409,7 @@ h3 {
   }
 
   .process-step {
-    min-height: 150px;
+    min-height: 0;
   }
 
   .work-thumb {
