@@ -412,6 +412,7 @@ h3 {
   border-radius: var(--radius);
   overflow: hidden;
   position: relative;
+  cursor: pointer;
   transition:
     min-height 0.65s cubic-bezier(0.22, 1, 0.36, 1),
     background 0.3s ease;
@@ -699,12 +700,19 @@ h3 {
 .result-card::before {
   content: "";
   position: absolute;
-  inset: 0 0 auto;
-  height: 4px;
-  background: linear-gradient(90deg, var(--blue-dark), rgba(111, 145, 173, 0.18));
-  transform: scaleX(0.18);
-  transform-origin: left;
-  transition: transform 0.28s ease;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 7px;
+  background: linear-gradient(
+    90deg,
+    rgba(73, 107, 134, 0.92) 0%,
+    rgba(111, 145, 173, 0.66) 34%,
+    rgba(201, 217, 230, 0.36) 68%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  opacity: 0.9;
+  transition: opacity 0.28s ease;
 }
 
 .result-card::after {
@@ -719,7 +727,7 @@ h3 {
 }
 
 .result-card:hover::before {
-  transform: scaleX(1);
+  opacity: 1;
 }
 
 .result-card-featured {

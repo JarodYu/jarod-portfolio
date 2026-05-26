@@ -2,6 +2,7 @@ const year = document.querySelector("#year");
 const toast = document.querySelector(".toast");
 const copyEmailButton = document.querySelector(".copy-email");
 const backToTopButton = document.querySelector(".back-to-top");
+const videoFrame = document.querySelector(".video-frame");
 const heroVideo = document.querySelector(".video-frame video");
 const videoSoundToggle = document.querySelector(".video-sound-toggle");
 const videoFullscreenTriggers = [...document.querySelectorAll(".video-fullscreen-trigger")];
@@ -246,6 +247,11 @@ if (videoLightbox && videoLightboxVideo && videoFullscreenTriggers.length > 0) {
       event.stopPropagation();
       openVideoLightbox();
     });
+  });
+
+  videoFrame?.addEventListener("click", (event) => {
+    if (event.target.closest(".video-sound-toggle")) return;
+    openVideoLightbox();
   });
 
   videoLightboxClose?.addEventListener("click", closeVideoLightbox);
