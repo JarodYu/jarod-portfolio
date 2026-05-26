@@ -4,6 +4,10 @@ const copyEmailButton = document.querySelector(".copy-email");
 const backToTopButton = document.querySelector(".back-to-top");
 const heroVideo = document.querySelector(".video-frame video");
 const videoSoundToggle = document.querySelector(".video-sound-toggle");
+const videoFullscreenTriggers = [...document.querySelectorAll(".video-fullscreen-trigger")];
+const videoLightbox = document.querySelector("[data-video-lightbox]");
+const videoLightboxVideo = videoLightbox?.querySelector("video");
+const videoLightboxClose = videoLightbox?.querySelector(".video-lightbox-close");
 const contactModalTriggers = [...document.querySelectorAll(".contact-modal-trigger")];
 const lineDialog = document.querySelector("#lineDialog");
 const dialogClose = document.querySelector(".dialog-close");
@@ -204,6 +208,65 @@ if (heroVideo && videoSoundToggle) {
       "aria-label",
       heroVideo.muted ? "開啟影片聲音" : "關閉影片聲音",
     );
+  });
+}
+
+if (videoLightbox && videoLightboxVideo && videoFullscreenTriggers.length > 0) {
+  let touchStartY = 0;
+  let touchDeltaY = 0;
+
+  const closeVideoLightbox = () => {
+    videoLightboxVideo.pause();
+    videoLightboxVideo.currentTime = 0;
+    videoLightbox.hidden = true;
+    videoLightbox.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("video-lightbox-open");
+    if (heroVideo) heroVideo.play().catch(() => {});
+  };
+
+  const openVideoLightbox = async () => {
+    heroVideo?.pause();
+    videoLightbox.hidden = false;
+    videoLightbox.setAttribute("aria-hidden", "false");
+    document.body.classList.add("video-lightbox-open");
+    videoLightboxVideo.currentTime = 0;
+    videoLightboxVideo.muted = false;
+    videoLightboxVideo.volume = 1;
+
+    try {
+      await videoLightboxVideo.play();
+    } catch {
+      videoLightboxVideo.muted = true;
+      await videoLightboxVideo.play().catch(() => {});
+    }
+  };
+
+  videoFullscreenTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", (event) => {
+      event.stopPropagation();
+      openVideoLightbox();
+    });
+  });
+
+  videoLightboxClose?.addEventListener("click", closeVideoLightbox);
+
+  videoLightbox.addEventListener("touchstart", (event) => {
+    touchStartY = event.touches[0].clientY;
+    touchDeltaY = 0;
+  }, { passive: true });
+
+  videoLightbox.addEventListener("touchmove", (event) => {
+    touchDeltaY = event.touches[0].clientY - touchStartY;
+  }, { passive: true });
+
+  videoLightbox.addEventListener("touchend", () => {
+    if (touchDeltaY > 90) closeVideoLightbox();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !videoLightbox.hidden) {
+      closeVideoLightbox();
+    }
   });
 }
 

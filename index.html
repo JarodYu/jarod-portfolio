@@ -66,7 +66,11 @@
                 聲音開啟
               </button>
               <div class="video-caption">
-                <div class="play-dot"></div>
+                <button
+                  class="play-dot video-fullscreen-trigger"
+                  type="button"
+                  aria-label="全螢幕播放影片"
+                ></button>
                 <div>
                   <strong>Hook</strong>
                   <span>3 秒內抓住注意力</span>
@@ -430,6 +434,11 @@
         <img src="./assets/line-qr.jpg" alt="LINE 聯絡 QR Code" />
       </div>
     </dialog>
+
+    <div class="video-lightbox" data-video-lightbox hidden aria-hidden="true">
+      <button class="video-lightbox-close" type="button" aria-label="關閉影片">×</button>
+      <video src="./assets/hero-live.mp4" playsinline controls preload="metadata"></video>
+    </div>
 
     <button
       class="mobile-line-button contact-modal-trigger"
