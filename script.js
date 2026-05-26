@@ -242,6 +242,62 @@ backToTopButton.addEventListener("click", () => {
   smoothScrollTo(document.querySelector("#top"));
 });
 
+document.querySelectorAll("[data-work-carousel]").forEach((carousel) => {
+  const track = carousel.querySelector("[data-carousel-track]");
+  const cards = [...carousel.querySelectorAll(".work-card")];
+  const previousButton = carousel.querySelector("[data-carousel-prev]");
+  const nextButton = carousel.querySelector("[data-carousel-next]");
+  const currentLabel = carousel.querySelector("[data-carousel-current]");
+  let carouselFrame;
+
+  if (!track || cards.length === 0) return;
+
+  const getCurrentIndex = () => {
+    const trackLeft = track.getBoundingClientRect().left;
+
+    return cards.reduce(
+      (closest, card, index) => {
+        const distance = Math.abs(card.getBoundingClientRect().left - trackLeft);
+        return distance < closest.distance ? { index, distance } : closest;
+      },
+      { index: 0, distance: Number.POSITIVE_INFINITY },
+    ).index;
+  };
+
+  const updateCarouselState = () => {
+    const index = getCurrentIndex();
+    if (currentLabel) currentLabel.textContent = String(index + 1).padStart(2, "0");
+  };
+
+  const moveToCard = (direction) => {
+    const nextIndex = (getCurrentIndex() + direction + cards.length) % cards.length;
+    cards[nextIndex].scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "start",
+    });
+  };
+
+  previousButton?.addEventListener("click", () => moveToCard(-1));
+  nextButton?.addEventListener("click", () => moveToCard(1));
+
+  track.addEventListener(
+    "scroll",
+    () => {
+      if (carouselFrame) return;
+
+      carouselFrame = requestAnimationFrame(() => {
+        updateCarouselState();
+        carouselFrame = null;
+      });
+    },
+    { passive: true },
+  );
+
+  window.addEventListener("resize", updateCarouselState);
+  updateCarouselState();
+});
+
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
