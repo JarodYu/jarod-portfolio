@@ -271,10 +271,9 @@ document.querySelectorAll("[data-work-carousel]").forEach((carousel) => {
 
   const moveToCard = (direction) => {
     const nextIndex = (getCurrentIndex() + direction + cards.length) % cards.length;
-    cards[nextIndex].scrollIntoView({
+    track.scrollTo({
+      left: cards[nextIndex].offsetLeft - track.offsetLeft,
       behavior: "smooth",
-      block: "nearest",
-      inline: "start",
     });
   };
 

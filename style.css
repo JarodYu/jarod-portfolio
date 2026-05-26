@@ -258,10 +258,12 @@ h2 span {
 
 .headline-accent {
   color: var(--headline-accent);
+  white-space: nowrap;
 }
 
 .headline-main {
   color: var(--ink);
+  white-space: nowrap;
 }
 
 h3 {
@@ -882,8 +884,9 @@ h3 {
   overflow-x: auto;
   scroll-behavior: smooth;
   scroll-padding-inline: 2px;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x proximity;
   scrollbar-width: none;
+  overscroll-behavior-inline: contain;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -894,6 +897,8 @@ h3 {
 .work-card {
   flex: 0 0 min(430px, calc(100% - 56px));
   scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  contain: layout paint;
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -1377,6 +1382,10 @@ h3 {
     line-height: 1.08;
   }
 
+  .contact-copy h2 {
+    font-size: clamp(38px, 10.6vw, 48px);
+  }
+
   h3 {
     line-height: 1.35;
   }
@@ -1487,39 +1496,58 @@ h3 {
   }
 
   .work-card {
-    flex-basis: min(86vw, 340px);
-    padding: 20px;
+    flex-basis: min(74vw, 284px);
+    padding: 14px;
   }
 
   .work-thumb {
-    min-height: 280px;
-    margin-bottom: 20px;
+    min-height: 0;
+    aspect-ratio: 4 / 5;
+    margin-bottom: 14px;
   }
 
   .work-carousel {
-    gap: 24px;
+    gap: 16px;
   }
 
   .work-track {
-    gap: 16px;
-    padding-bottom: 16px;
-    scroll-padding-inline: 0;
+    gap: 12px;
+    margin-inline: -18px;
+    padding: 2px 18px 14px;
+    scroll-padding-inline: 18px;
+  }
+
+  .work-card h3 {
+    margin-bottom: 14px;
+    font-size: 22px;
+    line-height: 1.32;
+  }
+
+  .work-card dl {
+    display: none;
+  }
+
+  .work-link {
+    width: 100%;
+    min-height: 42px;
+    padding-inline: 14px;
+    font-size: 14px;
   }
 
   .work-carousel-controls {
     justify-content: center;
-    gap: 14px;
+    gap: 12px;
   }
 
   .work-carousel-button {
-    width: 44px;
-    height: 44px;
-    font-size: 30px;
+    width: 40px;
+    height: 40px;
+    font-size: 28px;
   }
 
-  .work-card dl {
-    gap: 16px;
-    margin-bottom: 24px;
+  .work-carousel-status {
+    min-height: 34px;
+    padding-inline: 12px;
   }
 
   .work-card dd,
@@ -1683,7 +1711,8 @@ h3 {
   }
 
   .work-thumb {
-    min-height: 260px;
+    min-height: 0;
+    aspect-ratio: 4 / 5;
   }
 
   .metric-strip {
