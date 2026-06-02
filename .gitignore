@@ -6,9 +6,13 @@
 !README.md
 !package.json
 !.gitignore
+!.env.example
 !.vercelignore
+!tools/
+!tools/**
 !api/
 !api/**
+!docs/
+!docs/**
 !assets/
 !assets/**
-
