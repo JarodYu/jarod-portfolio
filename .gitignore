@@ -1,0 +1,18 @@
+# Keep this repository focused on the portfolio deployment.
+*
+!index.html
+!style.css
+!script.js
+!README.md
+!package.json
+!.gitignore
+!.env.example
+!.vercelignore
+!tools/
+!tools/**
+!api/
+!api/**
+!docs/
+!docs/**
+!assets/
+!assets/**
